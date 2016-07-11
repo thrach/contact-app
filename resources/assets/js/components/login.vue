@@ -1,6 +1,8 @@
-@extends('layouts.auth')
+<style>
 
-@section('content')
+</style>
+
+<template>
     <form class="login-form" action="" method="post">
         <h3 class="form-title">Login to your account</h3>
         <div class="alert alert-danger display-hide">
@@ -47,12 +49,22 @@
         <div class="forget-password">
             <h4>Forgot your password ?</h4>
             <p> no worries, click
-                <a href="{{ route('forgot') }}" id="forget-password"> here </a> to reset your password. </p>
+                <a v-link="{ path: '/forgot' }" id="forget-password"> here </a> to reset your password. </p>
         </div>
         <div class="create-account">
             <p> Don't have an account yet ?&nbsp;
-                <a href="{{ route('register') }}" id="register-btn"> Create an account </a>
+                <a v-link="{ path: '/register' }" id="register-btn"> Create an account </a>
             </p>
         </div>
     </form>
-@endsection
+</template>
+
+<script>
+    import Vue from 'vue';
+    import VueResource from 'vue-resource';
+
+    Vue.use(VueResource);
+    export default Vue.extend({
+
+    })
+</script>

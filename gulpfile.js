@@ -1,5 +1,7 @@
 var elixir = require('laravel-elixir');
 
+require('laravel-elixir-vueify');
+
 var publicCss = 'public/css/';
 var publicJs = 'public/js/';
 var resourceCss = 'resources/assets/css/';
@@ -12,6 +14,8 @@ elixir(function(mix) {
         'excanvas.min.js'
     ],publicJs + 'ie.js');
     
+    mix.browserify('app-config.js',resourceJs + 'app.js');
+    
     mix.styles([
         'font-awesome.min.css',
         'simple-line-icons.min.css',
@@ -23,12 +27,12 @@ elixir(function(mix) {
             'jquery.min.js',
             'bootstrap.min.js',
             'jquery.backstretch.min.js',
-            'login.min.js'
-        ],publicJs + 'auth.js')
+            'app.js'
+        ],publicJs + 'app.js')
     
     mix.version([
         publicCss + 'auth.css',
         publicJs + 'ie.js',
-        publicJs + 'auth.js'
+        publicJs + 'app.js'
     ])
 });

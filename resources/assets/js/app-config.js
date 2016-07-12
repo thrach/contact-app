@@ -6,6 +6,7 @@ import RegisterView from './components/register.vue';
 import ForgotView from './components/forgot.vue';
 import TermsView from './components/terms.vue';
 import PrivacyView from './components/privacy.vue';
+import DashboardView from './components/dashboard.vue';
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,10 @@ Router.map({
 
     'terms' : {
         component : TermsView
+    },
+
+    'dashboard' : {
+        component : DashboardView
     }
 })
 

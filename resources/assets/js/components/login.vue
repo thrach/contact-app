@@ -82,6 +82,7 @@
     import Vue from 'vue';
     import VueResource from 'vue-resource';
     import VueValidator from 'vue-validator';
+    import auth from '../auth';
 
     Vue.use(VueResource);
     Vue.use(VueValidator);
@@ -103,9 +104,24 @@
 
                     this.$http.post('login',data)
                         .then(response => {
-                            console.debug(response);
+                            if(response.status == 200)
+                            {
+                                auth.setApiToken(response.data.api_token);
+                            }
+
+                            this.$router.go('dashboard');
                         })
                 }
+            }
+        },
+
+        route: {
+            canActivate : function (transition) {
+                if(auth.checkApiToken()){
+                    transition.redirect('dashboard')
+                }
+
+                transition.next()
             }
         }
     })

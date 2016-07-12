@@ -17193,6 +17193,10 @@ var _privacy = require('./components/privacy.vue');
 
 var _privacy2 = _interopRequireDefault(_privacy);
 
+var _dashboard = require('./components/dashboard.vue');
+
+var _dashboard2 = _interopRequireDefault(_dashboard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
@@ -17231,12 +17235,99 @@ Router.map({
 
     'terms': {
         component: _terms2.default
+    },
+
+    'dashboard': {
+        component: _dashboard2.default
     }
 });
 
 Router.start(App, '#app');
 
-},{"./components/forgot.vue":9,"./components/index.vue":10,"./components/login.vue":11,"./components/privacy.vue":12,"./components/register.vue":13,"./components/terms.vue":14,"vue":6,"vue-router":4}],9:[function(require,module,exports){
+},{"./components/dashboard.vue":10,"./components/forgot.vue":11,"./components/index.vue":12,"./components/login.vue":13,"./components/privacy.vue":14,"./components/register.vue":15,"./components/terms.vue":16,"vue":6,"vue-router":4}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueResource = require('vue-resource');
+
+var _vueResource2 = _interopRequireDefault(_vueResource);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueResource2.default);
+
+exports.default = {
+    loggedIn: false,
+
+    api_token: '',
+
+    getApiToken: function getApiToken() {
+        this.api_token = window.localStorage.getItem('api_token');
+    },
+    setApiToken: function setApiToken(apiToken) {
+        window.localStorage.setItem('api_token', apiToken);
+    },
+    setHeader: function setHeader() {},
+    checkApiToken: function checkApiToken() {
+        this.getApiToken();
+
+        return this.api_token != null ? true : false;
+    },
+    checkAuth: function checkAuth() {
+        this.getApiToken();
+
+        _vue2.default.http.post('test', { api_token: this.api_token }).then(function (response) {
+            console.debug(response);
+        });
+    }
+};
+
+},{"vue":6,"vue-resource":3}],10:[function(require,module,exports){
+var __vueify_insert__ = require("vueify/lib/insert-css")
+var __vueify_style__ = __vueify_insert__.insert("\n\n")
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueResource = require('vue-resource');
+
+var _vueResource2 = _interopRequireDefault(_vueResource);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueResource2.default);
+
+exports.default = _vue2.default.extend({});
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<p>Dashboard test</p>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  module.hot.dispose(function () {
+    __vueify_insert__.cache["\n\n"] = false
+    document.head.removeChild(__vueify_style__)
+  })
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-5a32b3fd", module.exports)
+  } else {
+    hotAPI.update("_v-5a32b3fd", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vueify/lib/insert-css":7}],11:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 "use strict";
@@ -17256,7 +17347,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-5cfe35ec", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],10:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],12:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 "use strict";
@@ -17276,7 +17367,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-2178b3bb", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],11:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],13:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 'use strict';
@@ -17297,6 +17388,10 @@ var _vueValidator = require('vue-validator');
 
 var _vueValidator2 = _interopRequireDefault(_vueValidator);
 
+var _auth = require('../auth');
+
+var _auth2 = _interopRequireDefault(_auth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueResource2.default);
@@ -17311,6 +17406,8 @@ exports.default = _vue2.default.extend({
 
     methods: {
         login: function login() {
+            var _this = this;
+
             if (this.$loginValidation.valid) {
                 var data = {
                     username: this.username,
@@ -17318,9 +17415,23 @@ exports.default = _vue2.default.extend({
                 };
 
                 this.$http.post('login', data).then(function (response) {
-                    console.debug(response);
+                    if (response.status == 200) {
+                        _auth2.default.setApiToken(response.data.api_token);
+                    }
+
+                    _this.$router.go('dashboard');
                 });
             }
+        }
+    },
+
+    route: {
+        canActivate: function canActivate(transition) {
+            if (_auth2.default.checkApiToken()) {
+                transition.redirect('dashboard');
+            }
+
+            transition.next();
         }
     }
 });
@@ -17340,7 +17451,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-29bf525c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vue-validator":5,"vueify/lib/insert-css":7}],12:[function(require,module,exports){
+},{"../auth":9,"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vue-validator":5,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 'use strict';
@@ -17372,7 +17483,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-22d1599e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],13:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],15:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 'use strict';
@@ -17392,6 +17503,10 @@ var _vueResource2 = _interopRequireDefault(_vueResource);
 var _vueValidator = require('vue-validator');
 
 var _vueValidator2 = _interopRequireDefault(_vueValidator);
+
+var _auth = require('../auth');
+
+var _auth2 = _interopRequireDefault(_auth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -17426,9 +17541,23 @@ exports.default = _vue2.default.extend({
                 };
 
                 this.$http.post('register', data).then(function (response) {
-                    console.debug(response);
+                    if (response.statusCode == 200) {
+                        _auth2.default.setApiToken(response.data.api_token);
+                    }
+
+                    $router.redirect('dashboard');
                 });
             }
+        }
+    },
+
+    route: {
+        canActivate: function canActivate(transition) {
+            if (_auth2.default.checkApiToken()) {
+                transition.redirect('dashboard');
+            }
+
+            transition.next();
         }
     }
 });
@@ -17448,7 +17577,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-b2af0e6c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vue-validator":5,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
+},{"../auth":9,"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vue-validator":5,"vueify/lib/insert-css":7}],16:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 'use strict';

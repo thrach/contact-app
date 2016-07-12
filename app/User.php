@@ -59,6 +59,11 @@ class User extends Model implements
         return $this->api_token;
     }
 
+    /**
+     * Bcrypt password before saving in database
+     * 
+     * @param $value
+     */
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

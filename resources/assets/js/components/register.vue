@@ -3,8 +3,8 @@
 </style>
 
 <template>
-    <validator name="regValidation" novalidate v-on:submit.prevent="register">
-        <form  method="post" >
+    <validator name="regValidation" >
+        <form  method="post" novalidate v-on:submit.prevent="register">
             <h3>Sign Up</h3>
             <p> Enter your personal details below: </p>
             <div class="form-group" v-bind:class="{'has-error' : $regValidation.fullname.required}">
@@ -116,7 +116,21 @@
         },
         methods : {
             register(){
+                if(this.$regValidation.valid)
+                {
+                    let data = {
+                        fullname : this.fullname,
+                        email : this.email,
+                        username : this.username,
+                        password : this.password,
+                        tnc : this.tnc
+                    }
 
+                    this.$http.post('register',data)
+                        .then(response => {
+                            console.debug(response);
+                        })
+                }
             }
         }
     });

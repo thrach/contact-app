@@ -1,16 +1,17 @@
 <?php
 
-if(!function_exists('config_path'))
+if ( ! function_exists('config_path'))
 {
     /**
-     * Return the path to config files
-     * @param null $path
+     * Get the configuration path.
+     *
+     * @param  string $path
      * @return string
      */
-    function config_path($path=null)
-    {
-        return app()->getConfigurationPath(rtrim($path, ".php"));
-    }
+     function config_path($path = '')
+     {
+         return app()->basePath() . '/config' . ($path ? '/' . $path : $path);
+     }
 }
 
 if(!function_exists('public_path'))
@@ -214,26 +215,6 @@ if ( ! function_exists('secure_url'))
     function secure_url($path, $parameters = array())
     {
         return url($path, $parameters, true);
-    }
-}
-
-
-if ( ! function_exists('session'))
-{
-    /**
-     * Get / set the specified session value.
-     *
-     * If an array is passed as the key, we will assume you want to set an array of values.
-     *
-     * @param  array|string  $key
-     * @param  mixed  $default
-     * @return mixed
-     */
-    function session($key = null, $default = null)
-    {
-        if (is_null($key)) return app('session');
-        if (is_array($key)) return app('session')->put($key);
-        return app('session')->get($key, $default);
     }
 }
 

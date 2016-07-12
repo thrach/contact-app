@@ -94,7 +94,18 @@
         },
         methods : {
             login(){
-//                if(this.$loginValidation.valid)
+                if(this.$loginValidation.valid)
+                {
+                    let data = {
+                        username : this.username,
+                        password : this.password
+                    }
+
+                    this.$http.post('login',data)
+                        .then(response => {
+                            console.debug(response);
+                        })
+                }
             }
         }
     })

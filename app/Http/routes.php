@@ -1,12 +1,10 @@
 <?php
 
-$app->get('/', ['as' => 'login', function () {
+$app->get('/', function () {
     return view('index');
-}]);
+});
 
-$app->post('/login', ['as' => 'login','uses' => 'AuthController@login']);
+$app->post('login', ['as' => 'login','uses' => 'AuthController@login']);
+$app->post('register', ['as' => 'register','uses' => 'AuthController@register']);
 
-$app->get('/register', ['as' => 'register', function () {
-    return view('pages.register');
-}]);
 

@@ -20,7 +20,7 @@ class User extends Model implements
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'fullname', 'email', 'username', 'password'
     ];
 
     /**
@@ -31,4 +31,37 @@ class User extends Model implements
     protected $hidden = [
         'password',
     ];
+
+    /**
+     * Create new api_token for the user
+     * 
+     */
+    public function setApiToken()
+    {
+        $this->api_token = str_random(60);
+        $this->save();
+    }
+
+    /**
+     * Update api token for the user
+     * 
+     */
+    public function updateApiToken()
+    {
+        $this->setApiToken();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiToken()
+    {
+        return $this->api_token;
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+    
 }

@@ -19,16 +19,13 @@
                            autocomplete="off"
                            placeholder="Username"
                            name="username"
+                           v-model="username"
                            v-validate:username="['required']"
                     />
-                    <span class="help-block"
-                          v-if="$loginValidation.username.required"
-                    >Username is required</span>
+                    <span class="help-block" v-if="$loginValidation.username.required">Username is required</span>
                 </div>
             </div>
-            <div class="form-group"
-                 v-bind:class="{'has-error' : $loginValidation.password.minlength}"
-            >
+            <div class="form-group" v-bind:class="{'has-error' : $loginValidation.password.minlength}">
                 <label class="control-label visible-ie8 visible-ie9">Password</label>
                 <div class="input-icon">
                     <i class="fa fa-lock"></i>
@@ -37,21 +34,14 @@
                            autocomplete="off"
                            placeholder="Password"
                            name="password"
+                           v-model="password"
                            v-validate:password="{required : true,minlength : 4}"
                     />
-                    <span class="help-block"
-                          v-if="$loginValidation.password.required"
-                    >Password is required</span>
-                    <span class="help-block"
-                          v-if="$loginValidation.password.minlength"
-                    >Password min length is 4</span>
+                    <span class="help-block" v-if="$loginValidation.password.required">Password is required</span>
+                    <span class="help-block" v-if="$loginValidation.password.minlength">Password min length is 4</span>
                 </div>
             </div>
             <div class="form-actions">
-                <label class="rememberme mt-checkbox mt-checkbox-outline">
-                    <input type="checkbox" name="remember" value="1" /> Remember me
-                    <span></span>
-                </label>
                 <button type="submit"
                         class="btn green pull-right"
                         v-if="$loginValidation.valid"
@@ -96,7 +86,12 @@
     Vue.use(VueResource);
     Vue.use(VueValidator);
     export default Vue.extend({
-
+        data(){
+            return {
+                username : '',
+                password : ''
+            }
+        },
         methods : {
             login(){
 //                if(this.$loginValidation.valid)

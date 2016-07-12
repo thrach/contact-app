@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 
 let App = Vue.extend({
     ready(){
-        $.backstretch(["img/bg/2.jpg", "img/bg/3.jpg", "img/bg/4.jpg"], {
+        $.backstretch(["img/bg/2.jpg"], {
             fade: 1e3,
             duration: 8e3
         })

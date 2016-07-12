@@ -17199,7 +17199,7 @@ _vue2.default.use(_vueRouter2.default);
 
 var App = _vue2.default.extend({
     ready: function ready() {
-        $.backstretch(["img/bg/2.jpg", "img/bg/3.jpg", "img/bg/4.jpg"], {
+        $.backstretch(["img/bg/2.jpg"], {
             fade: 1e3,
             duration: 8e3
         });
@@ -17302,6 +17302,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(_vueResource2.default);
 _vue2.default.use(_vueValidator2.default);
 exports.default = _vue2.default.extend({
+    data: function data() {
+        return {
+            username: '',
+            password: ''
+        };
+    },
 
     methods: {
         login: function login() {
@@ -17310,7 +17316,7 @@ exports.default = _vue2.default.extend({
     }
 });
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<validator name=\"loginValidation\">\n    <form class=\"login-form\" method=\"post\" novalidate=\"\" v-on:submit.prevent=\"login\">\n        <h3 class=\"form-title\">Login to your account</h3>\n        <div class=\"alert alert-danger display-hide\">\n            <button class=\"close\" data-close=\"alert\"></button>\n            <span> Enter any username and password. </span>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $loginValidation.username.required}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Username</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-user\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"text\" autocomplete=\"off\" placeholder=\"Username\" name=\"username\" v-validate:username=\"['required']\">\n                <span class=\"help-block\" v-if=\"$loginValidation.username.required\">Username is required</span>\n            </div>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $loginValidation.password.minlength}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Password</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-lock\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"password\" autocomplete=\"off\" placeholder=\"Password\" name=\"password\" v-validate:password=\"{required : true,minlength : 4}\">\n                <span class=\"help-block\" v-if=\"$loginValidation.password.required\">Password is required</span>\n                <span class=\"help-block\" v-if=\"$loginValidation.password.minlength\">Password min length is 4</span>\n            </div>\n        </div>\n        <div class=\"form-actions\">\n            <label class=\"rememberme mt-checkbox mt-checkbox-outline\">\n                <input type=\"checkbox\" name=\"remember\" value=\"1\"> Remember me\n                <span></span>\n            </label>\n            <button type=\"submit\" class=\"btn green pull-right\" v-if=\"$loginValidation.valid\"> Login </button>\n        </div>\n        <div class=\"login-options\">\n            <h4>Or login with</h4>\n            <ul class=\"social-icons\">\n                <li>\n                    <a class=\"facebook\" data-original-title=\"facebook\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"twitter\" data-original-title=\"Twitter\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"googleplus\" data-original-title=\"Goole Plus\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"linkedin\" data-original-title=\"Linkedin\" href=\"javascript:;\"> </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"forget-password\">\n            <h4>Forgot your password ?</h4>\n            <p> no worries, click\n                <a v-link=\"{ path: '/forgot' }\" id=\"forget-password\"> here </a> to reset your password. </p>\n        </div>\n        <div class=\"create-account\">\n            <p> Don't have an account yet ?&nbsp;\n                <a v-link=\"{ path: '/register' }\" id=\"register-btn\"> Create an account </a>\n            </p>\n        </div>\n    </form>\n</validator>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<validator name=\"loginValidation\">\n    <form class=\"login-form\" method=\"post\" novalidate=\"\" v-on:submit.prevent=\"login\">\n        <h3 class=\"form-title\">Login to your account</h3>\n        <div class=\"alert alert-danger display-hide\">\n            <button class=\"close\" data-close=\"alert\"></button>\n            <span> Enter any username and password. </span>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $loginValidation.username.required}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Username</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-user\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"text\" autocomplete=\"off\" placeholder=\"Username\" name=\"username\" v-model=\"username\" v-validate:username=\"['required']\">\n                <span class=\"help-block\" v-if=\"$loginValidation.username.required\">Username is required</span>\n            </div>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $loginValidation.password.minlength}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Password</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-lock\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"password\" autocomplete=\"off\" placeholder=\"Password\" name=\"password\" v-model=\"password\" v-validate:password=\"{required : true,minlength : 4}\">\n                <span class=\"help-block\" v-if=\"$loginValidation.password.required\">Password is required</span>\n                <span class=\"help-block\" v-if=\"$loginValidation.password.minlength\">Password min length is 4</span>\n            </div>\n        </div>\n        <div class=\"form-actions\">\n            <button type=\"submit\" class=\"btn green pull-right\" v-if=\"$loginValidation.valid\"> Login </button>\n        </div>\n        <div class=\"login-options\">\n            <h4>Or login with</h4>\n            <ul class=\"social-icons\">\n                <li>\n                    <a class=\"facebook\" data-original-title=\"facebook\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"twitter\" data-original-title=\"Twitter\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"googleplus\" data-original-title=\"Goole Plus\" href=\"javascript:;\"> </a>\n                </li>\n                <li>\n                    <a class=\"linkedin\" data-original-title=\"Linkedin\" href=\"javascript:;\"> </a>\n                </li>\n            </ul>\n        </div>\n        <div class=\"forget-password\">\n            <h4>Forgot your password ?</h4>\n            <p> no worries, click\n                <a v-link=\"{ path: '/forgot' }\" id=\"forget-password\"> here </a> to reset your password. </p>\n        </div>\n        <div class=\"create-account\">\n            <p> Don't have an account yet ?&nbsp;\n                <a v-link=\"{ path: '/register' }\" id=\"register-btn\"> Create an account </a>\n            </p>\n        </div>\n    </form>\n</validator>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -17360,9 +17366,51 @@ if (module.hot) {(function () {  module.hot.accept()
 },{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],13:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _vue = require('vue');
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _vueResource = require('vue-resource');
+
+var _vueResource2 = _interopRequireDefault(_vueResource);
+
+var _vueValidator = require('vue-validator');
+
+var _vueValidator2 = _interopRequireDefault(_vueValidator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_vue2.default.use(_vueResource2.default);
+_vue2.default.use(_vueValidator2.default);
+
+_vue2.default.validator('email', function (val) {
+    return (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val)
+    );
+});
+
+exports.default = _vue2.default.extend({
+    data: function data() {
+        return {
+            fullname: '',
+            email: '',
+            username: '',
+            password: '',
+            tnc: false
+        };
+    },
+
+    methods: {
+        register: function register() {}
+    }
+});
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form action=\"index.html\" method=\"post\">\n    <h3>Sign Up</h3>\n    <p> Enter your personal details below: </p>\n    <div class=\"form-group\">\n        <label class=\"control-label visible-ie8 visible-ie9\">Full Name</label>\n        <div class=\"input-icon\">\n            <i class=\"fa fa-font\"></i>\n            <input class=\"form-control placeholder-no-fix\" type=\"text\" placeholder=\"Full Name\" name=\"fullname\"> </div>\n    </div>\n    <div class=\"form-group\">\n        <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->\n        <label class=\"control-label visible-ie8 visible-ie9\">Email</label>\n        <div class=\"input-icon\">\n            <i class=\"fa fa-envelope\"></i>\n            <input class=\"form-control placeholder-no-fix\" type=\"text\" placeholder=\"Email\" name=\"email\"> </div>\n    </div>\n    <p> Enter your account details below: </p>\n    <div class=\"form-group\">\n        <label class=\"control-label visible-ie8 visible-ie9\">Username</label>\n        <div class=\"input-icon\">\n            <i class=\"fa fa-user\"></i>\n            <input class=\"form-control placeholder-no-fix\" type=\"text\" autocomplete=\"off\" placeholder=\"Username\" name=\"username\"> </div>\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label visible-ie8 visible-ie9\">Password</label>\n        <div class=\"input-icon\">\n            <i class=\"fa fa-lock\"></i>\n            <input class=\"form-control placeholder-no-fix\" type=\"password\" autocomplete=\"off\" id=\"register_password\" placeholder=\"Password\" name=\"password\"> </div>\n    </div>\n    <div class=\"form-group\">\n        <label class=\"control-label visible-ie8 visible-ie9\">Re-type Your Password</label>\n        <div class=\"controls\">\n            <div class=\"input-icon\">\n                <i class=\"fa fa-check\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"password\" autocomplete=\"off\" placeholder=\"Re-type Your Password\" name=\"rpassword\"> </div>\n        </div>\n    </div>\n    <div class=\"form-group\">\n        <label class=\"mt-checkbox mt-checkbox-outline\">\n            <input type=\"checkbox\" name=\"remember\" value=\"1\">\n            <input type=\"checkbox\" name=\"tnc\"> I agree to the\n            <a v-link=\"{ path: '/terms' }\">Terms of Service </a> &amp;\n            <a v-link=\"{ path: '/privacy' }\">Privacy Policy </a>\n            <span></span>\n        </label>\n        <div id=\"register_tnc_error\"> </div>\n    </div>\n    <div class=\"form-actions\">\n        <a v-link=\"{ path: '/login' }\" id=\"register-back-btn\" class=\"btn red btn-outline\"> Back </a>\n        <button type=\"submit\" id=\"register-submit-btn\" class=\"btn green pull-right\"> Sign Up </button>\n    </div>\n</form>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<validator name=\"regValidation\" novalidate=\"\" v-on:submit.prevent=\"register\">\n    <form method=\"post\">\n        <h3>Sign Up</h3>\n        <p> Enter your personal details below: </p>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $regValidation.fullname.required}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Full Name</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-font\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"text\" placeholder=\"Full Name\" name=\"fullname\" v-model=\"fullname\" v-validate:fullname=\"['required']\">\n                <span class=\"help-block\" v-if=\"$regValidation.fullname.required\">Full name is required</span>\n            </div>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $regValidation.email.email}\">\n            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->\n            <label class=\"control-label visible-ie8 visible-ie9\">Email</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-envelope\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"text\" placeholder=\"Email\" name=\"email\" v-model=\"email\" v-validate:email=\"{required : true, email : true}\">\n                <span class=\"help-block\" v-if=\"$regValidation.email.required\">Email is required</span>\n                <span class=\"help-block\" v-if=\"$regValidation.email.email\">Email should be valid email address</span>\n            </div>\n        </div>\n        <p> Enter your account details below: </p>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $regValidation.username.minlength}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Username</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-user\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"text\" autocomplete=\"off\" placeholder=\"Username\" name=\"username\" v-model=\"username\" v-validate:username=\"{required : true, minlength : 2}\">\n                <span class=\"help-block\" v-if=\"$regValidation.username.required\">Username is required</span>\n                <span class=\"help-block\" v-if=\"$regValidation.username.minlength\">Username length should be at least 2</span>\n            </div>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $regValidation.password.minlength}\">\n            <label class=\"control-label visible-ie8 visible-ie9\">Password</label>\n            <div class=\"input-icon\">\n                <i class=\"fa fa-lock\"></i>\n                <input class=\"form-control placeholder-no-fix\" type=\"password\" autocomplete=\"off\" id=\"register_password\" placeholder=\"Password\" name=\"password\" v-model=\"password\" v-validate:password=\"{required : true, minlength : 4}\">\n                <span class=\"help-block\" v-if=\"$regValidation.password.required\">Password is required</span>\n                <span class=\"help-block\" v-if=\"$regValidation.password.minlength\">Password length should be at least 4</span>\n            </div>\n        </div>\n        <div class=\"form-group\" v-bind:class=\"{'has-error' : $regValidation.tnc.required}\">\n            <label class=\"mt-checkbox mt-checkbox-outline\">\n                <input type=\"checkbox\" name=\"tnc\" v-model=\"tnc\" v-validate:tnc=\"{required : true}\"> I agree to the\n                <a v-link=\"{ path: '/terms' }\">Terms of Service </a> &amp;\n                <a v-link=\"{ path: '/privacy' }\">Privacy Policy </a>\n                <span></span>\n            </label>\n            <div id=\"register_tnc_error\"> </div>\n        </div>\n        <div class=\"form-actions\">\n            <a v-link=\"{ path: '/login' }\" id=\"register-back-btn\" class=\"btn red btn-outline\"> Back </a>\n            <button type=\"submit\" id=\"register-submit-btn\" class=\"btn green pull-right\" v-if=\"$regValidation.valid\"> Sign Up </button>\n        </div>\n    </form>\n</validator>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -17377,7 +17425,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-b2af0e6c", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":6,"vue-hot-reload-api":2,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":2,"vue-resource":3,"vue-validator":5,"vueify/lib/insert-css":7}],14:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\n\n")
 'use strict';
